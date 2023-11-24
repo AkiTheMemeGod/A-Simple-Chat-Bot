@@ -31,11 +31,11 @@ async def on_message(message):
 
     if message.author == bot.user:
         return
-    if "change prefix to" in user_message:
+    if f"{get_pre()}change prefix to" in user_message:
         put_prefix(user_message[17:18])
         await message.channel.send(f"{message.author.mention} the prefix has been changed to `{get_pre()}`")
 
-    if 'bot' in user_message:
+    if 'bot' in user_message and str(message.author) != "Vault-Bot.#2071":
 
         if any(insult in user_message for insult in br.insults):
             await message.channel.send(random.choice(br.savage_bot_replies))
@@ -44,6 +44,10 @@ async def on_message(message):
             await message.channel.send(random.choice(br.bot_responses))
     if any(insult in user_message for insult in br.insults) and "bot" not in user_message:
         await message.channel.send(random.choice(br.insult_gifs))
+
+    if "prefix?" == user_message:
+        response = f"`{get_pre()}` is the current prefix for the bot-->{bot.user}"
+        await message.channel.send(response)
 
     await bot.process_commands(message)
 
@@ -73,6 +77,7 @@ async def roast(ctx, person: discord.User = ""):
     if person != "":
         response = f"{person.mention} {random.choice(br.roasts)}"
         await ctx.send(response)
+
     else:
         response = f"{ctx.author.mention} {random.choice(br.roasts_for_missing_argument)}"
         await ctx.send(response)
@@ -84,7 +89,7 @@ async def annoy(ctx, person: discord.User, times: int = ""):
         for i in range(times):
             response = f"{person.mention}"
             await ctx.send(response)
-            time.sleep(0.6)
+            await asyncio.sleep(0.6)
     else:
         response = f"{ctx.author.mention} {random.choice(br.roasts_for_missing_argument)}"
         await ctx.send(response)
@@ -113,3 +118,16 @@ async def timer(ctx, value: float, what: str = ""):
 
     response = f"{ctx.author.mention} Time's up!"
     await ctx.send(response)
+
+
+@bot.command(name="quote")
+async def quote(ctx):
+    response = get_quote()
+    await ctx.send(response)
+
+
+'''@bot.command(name="start")
+async def vault(ctx):
+    os.system("py C:\\PROJECTS\\Vault-Bot(discord)\\run_bot.py")
+    response = "starting the bot !"
+    await ctx.send(response)'''

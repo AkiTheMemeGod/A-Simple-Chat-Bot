@@ -6,6 +6,9 @@ from discord.ext import commands
 import bot_replies as br
 import tokens
 import asyncio
+import requests
+import json
+
 clock = ["mins", "hours", "secs"]
 
 
@@ -36,3 +39,8 @@ def put_prefix(arg, filepath="prefix.txt"):
         file.write(arg)
 
 
+def get_quote():
+    response = requests.get("https://zenquotes.io/api/random")
+    json_data = json.loads(response.text)
+    quote = json_data[0]['q'] + " -" + json_data[0]['a']
+    return quote
