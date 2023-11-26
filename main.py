@@ -31,9 +31,11 @@ async def on_message(message):
 
     if message.author == bot.user:
         return
-    if f"{get_pre()}change prefix to" in user_message:
-        put_prefix(user_message[17:18])
-        await message.channel.send(f"{message.author.mention} the prefix has been changed to `{get_pre()}`")
+
+    if username == "akithememegod":
+        if f"{get_pre()}change prefix to" in user_message:
+            put_prefix(user_message[17:18])
+            await message.channel.send(f"{message.author.mention} the prefix has been changed to `{get_pre()}`")
 
     if 'bot' in user_message and str(message.author) != "Vault-Bot.#2071":
 
@@ -42,6 +44,7 @@ async def on_message(message):
 
         else:
             await message.channel.send(random.choice(br.bot_responses))
+
     if any(insult in user_message for insult in br.insults) and "bot" not in user_message:
         await message.channel.send(random.choice(br.insult_gifs))
 
