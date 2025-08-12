@@ -10,13 +10,13 @@ async def on_ready():
     print(f'{bot.user} is now running!')
     await bot.change_presence(status=discord.Status.idle)
 
-    channel_id = 1176920698640408576
+    channel_id = 1238173545356460145
     startup_channel = bot.get_channel(channel_id)
 
     if startup_channel:
-        await startup_channel.purge(limit=None)
-        await startup_channel.send("@everyone")
-        await startup_channel.send("https://tenor.com/view/mr-bean-wave-hi-gif-6019924917754082345")
+        # await startup_channel.purge(limit=None)
+        # await startup_channel.send("@everyone")
+        await startup_channel.send("https://tenor.com/view/getting-online-getting-online-gif-27546602")
     else:
         print("Could not find the specified channel for startup message.")
 
@@ -34,7 +34,7 @@ async def on_message(message):
 
     if username == "akithememegod":
         if f"{get_pre()}change prefix to" in user_message:
-            put_prefix(user_message[17:18])
+            put_prefix(user_message[18:19])
             await message.channel.send(f"{message.author.mention} the prefix has been changed to `{get_pre()}`")
 
     if 'bot' in user_message and str(message.author) != "Vault-Bot.#2071":
@@ -57,9 +57,10 @@ async def on_message(message):
 
 @bot.command(name='dm')
 async def bot_command(ctx):
-    response = f"I slid into your dm :wink:"
-    await send_message(ctx, response=response, is_private=True)
-    await ctx.message.delete()
+    response = f" I slid into your dm :wink:"
+    await send_message(ctx, response=ctx.author.mention + response, is_private=False)
+    await send_message(ctx, response=response + " well Hello there :wink:", is_private=True)
+    # await ctx.message.delete()
 
 
 @bot.command(name='roll')

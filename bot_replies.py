@@ -13,7 +13,7 @@ insults = [
     "pfft",
     "yeah, right.",
     "nah",
-    "meh", "mkay", "K.","k."
+    "meh", "mkay", "K.","k.", "bruh"
 ]
 
 bot_responses = [
